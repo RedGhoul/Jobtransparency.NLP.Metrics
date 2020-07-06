@@ -40,7 +40,7 @@ router.get('/', async (req, res, next) => {
       } else {
         console.log(result.rows)
         apistats = result.rows;
-        var arrayPromise = get_array([20, 22, 33, 44, 55, 6, 7]);
+        var arrayPromise = get_array([1, 2, 3, 4, 5, 6, 7]);
         arrayPromise.then((results) => {
           res.render('index', { title: 'Express', apistats: apistats, counts: results });
         });

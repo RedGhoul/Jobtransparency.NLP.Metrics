@@ -22,8 +22,8 @@ module.exports = {
             }
             // set a timeout of 5 seconds, after which we will log this client's last query
             const timeout = setTimeout(() => {
-                console.error('A client has been checked out for more than 5 seconds!')
-                console.error(`The last executed query on this client was: ${client.lastQuery}`)
+                throw new Error('A client has been checked out for more than 5 seconds!')
+                // throw new Error(`The last executed query on this client was: ${client.lastQuery}`)
             }, 5000)
             const release = (err) => {
                 // call the actual 'done' method, returning this client to the pool

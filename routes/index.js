@@ -9,7 +9,7 @@ async function callback_Original(index) {
       where created_at < now()::date and created_at > now()::date - INTERVAL \' `+ index + `DAYS\'`,
       [], (err, res) => {
         if (err) {
-          console.log(err.stack)
+          throw new Error(err)
         } else {
           resolve({
             Day: index,
@@ -36,7 +36,7 @@ router.get('/', async (req, res, next) => {
     [], (err, result) => {
       if (err) {
         console.log(err.stack)
-        return new Error('Error finding snips');
+        throw new Error(err)
       } else {
         console.log(result.rows)
         apistats = result.rows;
@@ -44,14 +44,8 @@ router.get('/', async (req, res, next) => {
         arrayPromise.then((results) => {
           res.render('index', { title: 'Express', apistats: apistats, counts: results });
         });
-
-
-
       }
     })
-
-
-
 });
 
 module.exports = router;
